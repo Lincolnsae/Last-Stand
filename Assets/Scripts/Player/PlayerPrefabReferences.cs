@@ -16,7 +16,6 @@ public class PlayerPrefabReferences : MonoBehaviour
     public AudioClip shotAudio;
     public AudioClip abilityAudio;
     public AudioClip abilityOverAudio;
-    public float hiScore;
     public void Start()
     {
         

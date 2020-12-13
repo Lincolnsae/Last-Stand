@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BuildingBasic : MonoBehaviour
 {
-    public DataSingleton data;
     public float explosionSize;
     public enum buildingType { constructor, defence, command };
     public buildingType myType;
@@ -28,9 +27,6 @@ public class BuildingBasic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-       // data = GameObject.FindGameObjectWithTag("data").GetComponent<DataSingleton>();
-        //data = gameObject.GetComponent<DataSingleton>();
         armour = 1;
         evasion = 0;
         healthMax = 100;
@@ -98,8 +94,7 @@ public class BuildingBasic : MonoBehaviour
                 #endregion
         }
         healthCurrent -= finalDamage;
-        DataSingleton.hitsGiven += 1;
-       DataSingleton.dmgGiven += finalDamage;
+
         HealthCheck();
     }
 
@@ -134,7 +129,6 @@ public class BuildingBasic : MonoBehaviour
     public virtual void BuildingDestroyed()
     {
         ExplosionPool.explosionPool.GetObject().GetComponent<ExplosionLogic>().BeginExplosion(transform.position , explosionSize);
-        DataSingleton.structuresDestroyed += 1;
         Destroy(gameObject);
     }
 }

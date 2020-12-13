@@ -5,7 +5,6 @@ using Hellmade.Sound;
 
 public class CannonBuilding : BuildingDefence
 {
-    public DataSingleton databoy;
     public Transform projSpawnPointOne;
     public Transform projSpawnPointTwo;
     Transform secondPos;
