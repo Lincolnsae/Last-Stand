@@ -613,6 +613,7 @@ public class PlayerController : MonoBehaviour
                     shot.SetActive(true);
                     rifleAmmoCount--;
                     rifleShootCooldown = rifleROF;
+                    DataSingleton.shotsFired += 1;
                 }
                 else if (rifleAmmoCount <= 0 && !reloadingRifle)
                 {
@@ -648,6 +649,7 @@ public class PlayerController : MonoBehaviour
                     shot.SetActive(true);
                     sniperAmmoCount--;
                     sniperShootCooldown = sniperROF;
+                    DataSingleton.shotsFired += 1;
                 }
                 else if (sniperAmmoCount <= 0 && !reloadingSniper)
                 {
