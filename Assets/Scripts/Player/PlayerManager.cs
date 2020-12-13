@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using VulpineAlice.TooltipUI;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -41,11 +42,12 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager pM;
     public PlayerController pC;
+    //public DataSingleton data;
     float fpsCheck;
     float evasionTime;
 
     public Image armourBar, healthBar, dodgeBar;
-
+    
     private void Awake()
     {
         pM = this;
@@ -217,6 +219,8 @@ public class PlayerManager : MonoBehaviour
                     if (hitNo > tempGrazeChance || evasionCountCurrent < 1)
                     {
                         finalDamage = ArmourCalc(incomingDamage.damage);
+                        DataSingleton.hitsTaken += 1;
+                        DataSingleton.dmgTaken += finalDamage;
                         //projectile has hit the player
                         projectileResolved = true;
                     }
@@ -227,6 +231,8 @@ public class PlayerManager : MonoBehaviour
                         evasionCountCurrent--;
                         evasionTime = 0;
                         print("dodged");
+                        DataSingleton.hitsTaken += 1;
+                        DataSingleton.dmgTaken += finalDamage;
                         //rpojectile has hit the player
                         projectileResolved = true;
                     }
@@ -260,6 +266,8 @@ public class PlayerManager : MonoBehaviour
                     {
                         healthCurrent = 0;
                     }
+                    DataSingleton.hitsTaken += 1;
+                    DataSingleton.dmgTaken += ArmourCalc(incomingDamage.damage);
                     //rpojectile has hit the player
                     projectileResolved = true;
                     break;
@@ -273,6 +281,8 @@ public class PlayerManager : MonoBehaviour
                     if (hitNo > tempGrazeChance || evasionCountCurrent < 1)
                     {
                         finalDamage = incomingDamage.damage;
+                       DataSingleton.hitsTaken += 1;
+                     DataSingleton.dmgTaken += finalDamage;
                         //rpojectile has hit the player
                         projectileResolved = true;
                     }
@@ -282,7 +292,9 @@ public class PlayerManager : MonoBehaviour
                         finalDamage = (int)(incomingDamage.damage / 2);
                         evasionCountCurrent--;
                         evasionTime = 0;
-                        print("dodged");
+                     print("dodged");
+                        DataSingleton.hitsTaken += 1;
+                        DataSingleton.dmgTaken += finalDamage;
                         //rpojectile has hit the player
                         projectileResolved = true;
                     }
@@ -315,7 +327,10 @@ public class PlayerManager : MonoBehaviour
                     if (healthCurrent < 0)
                     {
                         healthCurrent = 0;
+                       
                     }
+                    DataSingleton.hitsTaken += 1;
+                    DataSingleton.dmgTaken += incomingDamage.damage;
                     //pojectile has hit the player
                     projectileResolved = true;
                     break;
@@ -365,6 +380,7 @@ public class PlayerManager : MonoBehaviour
         pC.myAnim.SetBool("dead", true);
         pC.LockPlayer();
         print("get gud fuckboi");
+        SceneManager.LoadScene(4);
     }
 
     #region abilities

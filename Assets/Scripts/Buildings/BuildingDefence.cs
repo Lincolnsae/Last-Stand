@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildingDefence : BuildingBasic
 {
+    public DataSingleton dataSing;
     public Transform turretBody;
     protected Vector3 myPos;
     protected GameObject activeTarget;
@@ -18,7 +19,10 @@ public class BuildingDefence : BuildingBasic
     {
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-
+    private void Awake()
+    {
+      
+    }
     // Update is called once per frame
     void Update()
     {

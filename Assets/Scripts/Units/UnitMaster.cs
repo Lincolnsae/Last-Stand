@@ -331,18 +331,22 @@ public class UnitMaster : MonoBehaviour
         //checks if the player is dead
         if (healthCurrent < 1)
         {
+            
             UnitDead();
+            
         }
     }
 
     void UnitDead()
     {
+        
         myAnim.SetBool("dead",true);
         pRoute.RemoveUnit();
         if(myConstructor.garrisonedUnit == gameObject)
         {
             myConstructor.garrisonedUnit = null;
         }
+        DataSingleton.enemiesSlain += 1;
         Destroy(gameObject,0.833f);
     }    
 
